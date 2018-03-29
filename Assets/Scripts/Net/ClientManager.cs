@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Net.Sockets;
+using MyWarCommon;
 
 public class ClientManager : BaseManager {
 
@@ -24,7 +25,17 @@ public class ClientManager : BaseManager {
             Debug.LogError("连接服务器错误，请检查网络！" + e);
         }
     }
-
+    /// <summary>
+    /// 发送数据
+    /// </summary>
+    /// <param name="requestCode"></param>
+    /// <param name="actionCode"></param>
+    /// <param name="data"></param>
+    public void SendMessage(RequestCode requestCode, ActionCode actionCode, string data)
+    {
+        byte[] dataBytes = Message.PickeData(requestCode, actionCode, data);
+        clientSocket.Send(dataBytes);
+    }
     public override void OnDestroy()
     {
         base.OnDestroy();
