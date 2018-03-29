@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class UIManager1 {
+public class UIManager : BaseManager {
 
     /// 
     /// 单例模式的核心
@@ -40,11 +40,14 @@ public class UIManager1 {
     private Dictionary<UIPanelType, BasePanel> panelDict;//保存所有实例化面板的游戏物体身上的BasePanel组件
     private Stack<BasePanel> panelStack;
 
-    public UIManager1()
+    public UIManager(Game gameFacade) : base(gameFacade)
     {
         ParseUIPanelTypeJson();
     }
-
+    public override void OnInit()
+    {
+        base.OnInit();
+    }
     /// <summary>
     /// 把某个页面入栈，  把某个页面显示在界面上
     /// </summary>

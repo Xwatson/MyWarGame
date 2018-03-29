@@ -11,10 +11,12 @@ public class ClientManager : BaseManager {
     private const int PORT = 3318;
 
     private Socket clientSocket;
-
+    private Message message = new Message();
+    public ClientManager(Game gameFacade) : base(gameFacade) { }
     public override void OnInit()
     {
         base.OnInit();
+        Start();
         try
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -24,6 +26,27 @@ public class ClientManager : BaseManager {
         {
             Debug.LogError("连接服务器错误，请检查网络！" + e);
         }
+    }
+    public void Start()
+    {
+        clientSocket.BeginReceive(message.Data, message.StartIndex, message.RemainSize, SocketFlags.None, ReceiveClientCallBack, null);
+    }
+    private void ReceiveClientCallBack(IAsyncResult ar)
+    {
+        try
+        {
+            int count = clientSocket.EndReceive(ar);
+            message.ReadMessage(count, ProcessMessageCallBack);
+            Start();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("读取数据出错：" + e);
+        }
+    }
+    private void ProcessMessageCallBack(RequestCode requestCode, string data)
+    {
+        gameFacade.HandleResponse(requestCode, data);
     }
     /// <summary>
     /// 发送数据
