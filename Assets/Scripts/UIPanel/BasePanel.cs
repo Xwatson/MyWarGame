@@ -2,6 +2,13 @@
 using System.Collections;
 
 public class BasePanel : MonoBehaviour {
+    // 每个面板持有 UIManager引用
+    protected UIManager uIManager;
+
+    public UIManager UIManager
+    {
+        set { uIManager = value; }
+    }
     /// <summary>
     /// 界面被显示出来
     /// </summary>

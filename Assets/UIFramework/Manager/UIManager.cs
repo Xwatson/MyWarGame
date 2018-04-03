@@ -39,6 +39,7 @@ public class UIManager : BaseManager {
     private Dictionary<UIPanelType, string> panelPathDict;//存储所有面板Prefab的路径
     private Dictionary<UIPanelType, BasePanel> panelDict;//保存所有实例化面板的游戏物体身上的BasePanel组件
     private Stack<BasePanel> panelStack;
+    private MessagePanel messagePanel;
 
     public UIManager(Game gameFacade) : base(gameFacade)
     {
@@ -112,6 +113,8 @@ public class UIManager : BaseManager {
             GameObject instPanel = GameObject.Instantiate(Resources.Load(path)) as GameObject;
             instPanel.transform.SetParent(CanvasTransform,false);
             panelDict.Add(panelType, instPanel.GetComponent<BasePanel>());
+            // 设置UIManager引用
+            instPanel.GetComponent<BasePanel>().UIManager = this;
             return instPanel.GetComponent<BasePanel>();
         }
         else
@@ -120,7 +123,27 @@ public class UIManager : BaseManager {
         }
 
     }
-
+    /// <summary>
+    /// 显示提示信息
+    /// </summary>
+    /// <param name="message"></param>
+    public void ShowMessage(string message)
+    {
+        if (messagePanel == null)
+        {
+            Debug.LogError("未能找到MessagePanel");
+            return;
+        }
+        messagePanel.ShowMessage(message);
+    }
+    /// <summary>
+    /// 注入MessagePanel对象
+    /// </summary>
+    /// <param name="messagePanel"></param>
+    public void InjectMessagePanel(MessagePanel messagePanel)
+    {
+        this.messagePanel = messagePanel;
+    }
     [Serializable]
     class UIPanelTypeJson
     {
@@ -140,14 +163,5 @@ public class UIManager : BaseManager {
             panelPathDict.Add(info.panelType, info.path);
         }
     }
-
-    /// <summary>
-    /// just for test
-    /// </summary>
-    public void Test()
-    {
-        string path ;
-        panelPathDict.TryGetValue(UIPanelType.Knapsack,out path);
-        Debug.Log(path);
-    }
+    
 }

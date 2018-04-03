@@ -90,4 +90,12 @@ public class Game : MonoBehaviour
     {
         requestManager.HandleResponse(requestCode, data);
     }
+    /// <summary>
+    /// 显示提示消息
+    /// </summary>
+    /// <param name="message"></param>
+    public void ShowMessage(string message)
+    {
+        uIManager.ShowMessage(message);
+    }
 }
