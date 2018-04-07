@@ -16,11 +16,11 @@ public class ClientManager : BaseManager {
     public override void OnInit()
     {
         base.OnInit();
-        Start();
         try
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             clientSocket.Connect(HOST, PORT);
+            Start();
         }
         catch (Exception e)
         {
