@@ -48,8 +48,8 @@ public class UIManager : BaseManager {
     public override void OnInit()
     {
         base.OnInit();
-        PushPanel(UIPanelType.Start);
         PushPanel(UIPanelType.Message);
+        PushPanel(UIPanelType.Start);
     }
     /// <summary>
     /// 把某个页面入栈，  把某个页面显示在界面上
