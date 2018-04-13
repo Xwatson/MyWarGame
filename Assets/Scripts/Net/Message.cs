@@ -34,7 +34,7 @@ public class Message {
     /// </summary>
     /// <param name="newAmount">数据长度</param>
     /// <param name="processMessageCallBack">解析消息回调</param>
-    public void ReadMessage(int newAmount, Action<RequestCode, string> processMessageCallBack)
+    public void ReadMessage(int newAmount, Action<ActionCode, string> processMessageCallBack)
     {
         // 更新数据存储位置
         startIndex += newAmount;
@@ -48,12 +48,12 @@ public class Message {
             // 如果真实数据长度大于标识的长度，说明数据完整
             if (startIndex - 4 >= count)
             {
-                // 解析请求code
-                RequestCode requestCode = (RequestCode)BitConverter.ToInt32(data, 4);
+                // 解析方法code
+                ActionCode actionCode = (ActionCode)BitConverter.ToInt32(data, 4);
                 // 开始读取数据，从4开始代表0到3为标识数据长度所占用
                 // 开始读取数据，从4开始代表0到3为标识数据长度所占用
                 string result = Encoding.UTF8.GetString(data, 8, count - 4);
-                processMessageCallBack(requestCode, result);
+                processMessageCallBack(actionCode, result);
                 // Console.WriteLine("解析出一条数据：" + result);
                 // 移动数据 count+4表示上面已经读取了， startIndex-4-count表示剩余长度
                 Array.Copy(data, count + 4, data, 0, startIndex - 4 - count);

@@ -69,26 +69,26 @@ public class Game : MonoBehaviour
     /// <summary>
     /// 添加request
     /// </summary>
-    public void AddRequest(RequestCode requestCode, BaseRequest request)
+    public void AddRequest(ActionCode actionCode, BaseRequest request)
     {
-        requestManager.AddRequest(requestCode, request);
+        requestManager.AddRequest(actionCode, request);
     }
     /// <summary>
     /// 删除request
     /// </summary>
     /// <param name="requestCode"></param>
-    public void RemoveRequest(RequestCode requestCode)
+    public void RemoveRequest(ActionCode actionCode)
     {
-        requestManager.RemoveRequest(requestCode);
+        requestManager.RemoveRequest(actionCode);
     }
     /// <summary>
     /// 处理响应
     /// </summary>
     /// <param name="requestCode"></param>
     /// <param name="data"></param>
-    public void HandleResponse(RequestCode requestCode, string data)
+    public void HandleResponse(ActionCode actionCode, string data)
     {
-        requestManager.HandleResponse(requestCode, data);
+        requestManager.HandleResponse(actionCode, data);
     }
     /// <summary>
     /// 显示提示消息

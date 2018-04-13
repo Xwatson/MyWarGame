@@ -44,9 +44,9 @@ public class ClientManager : BaseManager {
             Debug.LogError("读取数据出错：" + e);
         }
     }
-    private void ProcessMessageCallBack(RequestCode requestCode, string data)
+    private void ProcessMessageCallBack(ActionCode actionCode, string data)
     {
-        gameFacade.HandleResponse(requestCode, data);
+        gameFacade.HandleResponse(actionCode, data);
     }
     /// <summary>
     /// 发送数据

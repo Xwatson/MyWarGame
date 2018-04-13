@@ -5,12 +5,13 @@ using MyWarCommon;
 
 // 场景内所有的请求
 public class BaseRequest : MonoBehaviour {
-    private RequestCode requestCode = RequestCode.None;
+    protected RequestCode requestCode = RequestCode.None;
+    protected ActionCode actionCode = ActionCode.None;
 
 	public virtual void Awake()
     {
         // 把自身交给RequestManager管理
-        Game.Instance.AddRequest(requestCode, this);
+        Game.Instance.AddRequest(actionCode, this);
     }
     /// <summary>
     /// 发送请求
@@ -26,6 +27,6 @@ public class BaseRequest : MonoBehaviour {
     /// </summary>
     public virtual void OnDestroy()
     {
-        Game.Instance.RemoveRequest(requestCode);
+        Game.Instance.RemoveRequest(actionCode);
     }
 }

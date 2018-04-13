@@ -5,31 +5,31 @@ using MyWarCommon;
 
 public class RequestManager : BaseManager {
 
-    private Dictionary<RequestCode, BaseRequest> requestDic = new Dictionary<RequestCode, BaseRequest>();
+    private Dictionary<ActionCode, BaseRequest> requestDic = new Dictionary<ActionCode, BaseRequest>();
 
     public RequestManager(Game gameFacade): base(gameFacade) { }
 
     /// <summary>
     /// 添加请求
     /// </summary>
-    /// <param name="requestCode"></param>
-    public void AddRequest(RequestCode requestCode, BaseRequest request)
+    /// <param name="actionCode"></param>
+    public void AddRequest(ActionCode actionCode, BaseRequest request)
     {
-        requestDic.Add(requestCode, request);
+        requestDic.Add(actionCode, request);
     }
-    public void RemoveRequest(RequestCode requestCode)
+    public void RemoveRequest(ActionCode actionCode)
     {
-        requestDic.Remove(requestCode);
+        requestDic.Remove(actionCode);
     }
     /// <summary>
     /// 响应数据
     /// </summary>
-    public void HandleResponse(RequestCode requestCode, string data)
+    public void HandleResponse(ActionCode actionCode, string data)
     {
-        BaseRequest request = requestDic.TryGet(requestCode);
+        BaseRequest request = requestDic.TryGet(actionCode);
         if (request == null)
         {
-            Debug.Log("无法找到RequestCode[" + requestCode + "]对应的Request类");
+            Debug.Log("无法找到ActionCode[" + actionCode + "]对应的Request类");
             return;
         }
         request.OnResponse(data);
