@@ -19,14 +19,14 @@ public class MessagePanel : BasePanel {
 
     public void ShowMessage(string message)
     {
+        text.CrossFadeAlpha(1, 0.2f, false);
         text.text = message;
-        text.color = Color.white;
         text.enabled = true;
         Invoke("Hide", showTime);
     }
     public void Hide()
     {
         // 1秒渐隐
-        text.CrossFadeAlpha(0, 1, false);
+        text.CrossFadeAlpha(0, 2, false);
     }
 }
