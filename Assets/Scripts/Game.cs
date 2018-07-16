@@ -98,4 +98,14 @@ public class Game : MonoBehaviour
     {
         uIManager.ShowMessage(message);
     }
+    /// <summary>
+    /// 发送数据
+    /// </summary>
+    /// <param name="requestCode"></param>
+    /// <param name="actionCode"></param>
+    /// <param name="data"></param>
+    public void SendRequest(RequestCode requestCode, ActionCode actionCode, string data)
+    {
+        clientManager.SendRequest(requestCode, actionCode, data);
+    }
 }

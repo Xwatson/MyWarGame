@@ -9,6 +9,8 @@ public class LoginPanel : BasePanel {
     private Button button;
     private InputField userNameIF;
     private InputField passwordIF;
+    private LoginRequest loginRequest;
+
     public override void OnEnter()
     {
         base.OnEnter();
@@ -17,6 +19,7 @@ public class LoginPanel : BasePanel {
         button.onClick.AddListener(OnClose);
         transform.localScale = Vector3.zero;
         transform.DOScale(1, 0.5f);
+        loginRequest = GetComponent<LoginRequest>();
         userNameIF = transform.Find("UserNameLabel/UserNameInput").GetComponent<InputField>();
         passwordIF = transform.Find("PwdLabel/PwdInput").GetComponent<InputField>();
         transform.Find("LoginButton").GetComponent<Button>().onClick.AddListener(OnLoginClick);
@@ -38,6 +41,8 @@ public class LoginPanel : BasePanel {
             uIManager.ShowMessage(msg + "不能为空");
             return;
         }
+        // 发送登录请求
+        loginRequest.SendRequest(userNameIF.text, passwordIF.text);
     }
     private void OnRegisterClick()
     {
