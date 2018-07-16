@@ -54,7 +54,7 @@ public class ClientManager : BaseManager {
     /// <param name="requestCode"></param>
     /// <param name="actionCode"></param>
     /// <param name="data"></param>
-    public void SendMessage(RequestCode requestCode, ActionCode actionCode, string data)
+    public void SendRequest(RequestCode requestCode, ActionCode actionCode, string data)
     {
         byte[] dataBytes = Message.PickeData(requestCode, actionCode, data);
         clientSocket.Send(dataBytes);
