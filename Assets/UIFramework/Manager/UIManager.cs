@@ -139,6 +139,19 @@ public class UIManager : BaseManager {
         messagePanel.ShowMessage(message);
     }
     /// <summary>
+    /// 异步显示提示信息
+    /// </summary>
+    /// <param name="message"></param>
+    public void ShowMessageSync(string message)
+    {
+        if (messagePanel == null)
+        {
+            Debug.LogError("未能找到MessagePanel");
+            return;
+        }
+        messagePanel.ShowMessageSync(message);
+    }
+    /// <summary>
     /// 注入MessagePanel对象
     /// </summary>
     /// <param name="messagePanel"></param>

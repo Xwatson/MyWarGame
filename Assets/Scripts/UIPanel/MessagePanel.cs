@@ -7,7 +7,15 @@ public class MessagePanel : BasePanel {
 
     private Text text;
     public float showTime = 1; // 默认显示时间
-
+    private string message = null;
+    private void Update()
+    {
+        if (message != null)
+        {
+            ShowMessage(message);
+            message = null;
+        }   
+    }
     public override void OnEnter()
     {
         base.OnEnter();
@@ -16,7 +24,11 @@ public class MessagePanel : BasePanel {
         // 把当前对象注入到UIManager中
         uIManager.InjectMessagePanel(this);
     }
-
+    // 异步显示消息
+    public void ShowMessageSync(string message)
+    {
+        this.message = message;
+    }
     public void ShowMessage(string message)
     {
         text.CrossFadeAlpha(1, 0.2f, false);
