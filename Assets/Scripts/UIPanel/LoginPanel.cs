@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using MyWarCommon;
 
 public class LoginPanel : BasePanel {
 
@@ -43,6 +44,17 @@ public class LoginPanel : BasePanel {
         }
         // 发送登录请求
         loginRequest.SendRequest(userNameIF.text, passwordIF.text);
+    }
+    public void OnLoginResponse(ReturnCode returnCode)
+    {
+        if (returnCode == ReturnCode.Success)
+        {
+            // 进入房间
+        }
+        else
+        {
+            uIManager.ShowMessageSync("用户名密码错误，请重新输入！");
+        }
     }
     private void OnRegisterClick()
     {
